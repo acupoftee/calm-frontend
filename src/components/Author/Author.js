@@ -31,7 +31,6 @@ class Author extends Component {
       <div>
         { author && (
           <Fragment>
-            <img src={author.avatarUrl} height="50"/>
             <h1>{author.displayName}</h1>
             <div>
               {blogSnippetsJsx}
