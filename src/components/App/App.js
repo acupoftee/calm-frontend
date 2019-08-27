@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 import BlogSnippets from '../Blog/BlogSnippets'
 import Blog from '../Blog/Blog'
+import UpdateBlog from '../Blog/UpdateBlog'
 import Author from '../Author/Author'
 class App extends Component {
   constructor () {
@@ -67,6 +68,16 @@ class App extends Component {
             render={() => (
               <Author user={user}/>
             )}/>
+          <AuthenticatedRoute
+            user={user}
+            path='/blogs/:id/edit'
+            render={() => (
+              <UpdateBlog
+                user={user}
+                alert={this.alert}
+              />
+            )}
+          />
         </main>
       </Fragment>
     )
