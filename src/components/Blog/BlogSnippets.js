@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
@@ -26,7 +27,11 @@ class BlogSnippets extends Component {
   render () {
     const blogSnippetsJsx = this.state.blogSnippets.map(blog => (
       <Card className="blog-snippet" key={blog._id}>
-        <Card.Title>{blog.title}</Card.Title>
+        <Card.Title>
+          <Link to={`/blogs/${blog._id}`}>
+            {blog.title}
+          </Link>
+        </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
         <Card.Text>{blog.text}</Card.Text>
       </Card>
