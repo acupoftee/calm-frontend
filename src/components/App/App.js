@@ -62,7 +62,10 @@ class App extends Component {
           <Route exact path='/blogs/:id'
             user={user}
             render={() => (
-              <Blog user={user}/>
+              <Blog
+                user={user}
+                alert={this.alert}
+              />
             )}/>
           <Route exact path='/authors/:id'
             render={() => (
