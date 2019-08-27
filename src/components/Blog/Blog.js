@@ -6,21 +6,31 @@ import apiUrl from '../../apiConfig'
 
 class Blog extends Component {
   state = {
-    blog: null
+    blog: null,
+    loading: true
   }
 
   async componentDidMount () {
     try {
       const response = await axios(`${apiUrl}/blogs/${this.props.match.params.id}`)
-      this.setState({ blog: response.data.blog })
+      this.setState({ blog: response.data.blog, loading: false })
     } catch (error) {
       console.error(error)
     }
   }
 
   render () {
-    const { blog } = this.state
-
+    const { blog, loading } = this.state
+    let buttonGroupJsx
+    if (!loading) {
+      buttonGroupJsx = (
+        <Fragment>
+          <Button href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
+          <span>&nbsp;</span>
+          <Button variant="danger">Delete Blog</Button>
+        </Fragment>
+      )
+    }
     return (
       <div>
         { blog && (
@@ -31,7 +41,7 @@ class Blog extends Component {
             </Link>
             <p>{blog.text}</p>
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
-              ? <Button href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
+              ? buttonGroupJsx
               : ''}
           </Fragment>
         )
