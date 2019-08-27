@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import BlogSnippet from './BlogSnippet'
 
 // import ListGroup from 'react-bootstrap/ListGroup'
-import Card from 'react-bootstrap/Card'
+// import Card from 'react-bootstrap/Card'
 import Spinner from 'react-bootstrap/Spinner'
 
 class BlogSnippets extends Component {
@@ -26,15 +27,7 @@ class BlogSnippets extends Component {
 
   render () {
     const blogSnippetsJsx = this.state.blogSnippets.map(blog => (
-      <Card className="blog-snippet" key={blog._id}>
-        <Card.Title>
-          <Link to={`/blogs/${blog._id}`}>
-            {blog.title}
-          </Link>
-        </Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{blog.author}</Card.Subtitle>
-        <Card.Text>{blog.text}</Card.Text>
-      </Card>
+      <BlogSnippet blog={blog} key={blog._id}/>
     ))
 
     // if (this.state.loading) {
@@ -50,13 +43,5 @@ class BlogSnippets extends Component {
     )
   }
 }
-
-// const BlogSnippet = ({ title, author, createdAt, text }) => (
-//   <div>
-//     <h1>{title}</h1>
-//     <small>{author} - {createdAt}</small>
-//     <p>{text}</p>
-//   </div>
-// )
 
 export default BlogSnippets
