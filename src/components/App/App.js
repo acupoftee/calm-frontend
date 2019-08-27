@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 import BlogSnippets from '../Blog/BlogSnippets'
 import Blog from '../Blog/Blog'
+import Author from '../Author/Author'
 class App extends Component {
   constructor () {
     super()
@@ -61,6 +62,10 @@ class App extends Component {
             user={user}
             render={() => (
               <Blog user={user}/>
+            )}/>
+          <Route exact path='/authors/:id'
+            render={() => (
+              <Author user={user}/>
             )}/>
         </main>
       </Fragment>
