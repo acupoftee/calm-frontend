@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -7,7 +7,8 @@ import apiUrl from '../../apiConfig'
 class Blog extends Component {
   state = {
     blog: null,
-    loading: true
+    loading: true,
+    deleted: false
   }
 
   async componentDidMount () {
@@ -19,15 +20,48 @@ class Blog extends Component {
     }
   }
 
+  delete = async () => {
+    try {
+      await axios.delete(`${apiUrl}/blogs/${this.props.match.params.id}`, {
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        }
+      })
+      this.setState({ deleted: true })
+      this.props.alert({
+        heading: 'Success!!!!',
+        message: 'You deleted a blog.',
+        variant: 'success'
+      })
+    } catch (error) {
+      console.log(error)
+      this.props.alert({
+        heading: 'Error',
+        message: 'There was a problem deleting this.',
+        variant: 'danger'
+      })
+    }
+  }
+
   render () {
-    const { blog, loading } = this.state
+    const { blog, loading, deleted } = this.state
     let buttonGroupJsx
+    if (deleted) {
+      return <Redirect to={
+        {
+          pathname: `/authors/${blog.owner}`,
+          state: {
+            msg: 'Movie successfully deleted'
+          }
+        }
+      }/>
+    }
     if (!loading) {
       buttonGroupJsx = (
         <Fragment>
           <Button href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
           <span>&nbsp;</span>
-          <Button variant="danger">Delete Blog</Button>
+          <Button variant="danger" onClick={this.delete}>Delete Blog</Button>
         </Fragment>
       )
     }
