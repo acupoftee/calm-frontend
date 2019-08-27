@@ -10,6 +10,7 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
 import BlogSnippets from '../Blog/BlogSnippets'
+import Blog from '../Blog/Blog'
 class App extends Component {
   constructor () {
     super()
@@ -56,6 +57,11 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <Route exact path='/' component={BlogSnippets} />
+          <Route exact path='/blogs/:id'
+            user={user}
+            render={() => (
+              <Blog user={user}/>
+            )}/>
         </main>
       </Fragment>
     )
