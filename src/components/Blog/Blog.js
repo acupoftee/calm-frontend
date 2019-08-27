@@ -31,7 +31,7 @@ class Blog extends Component {
             </Link>
             <p>{blog.text}</p>
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
-              ? <Button href={`#/blogs/${blog.title}/edit`}>Edit Blog</Button>
+              ? <Button href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
               : ''}
           </Fragment>
         )
