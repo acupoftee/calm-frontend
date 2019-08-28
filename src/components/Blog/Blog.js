@@ -3,6 +3,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import Comments from '../Comment/Comments'
 
 class Blog extends Component {
   state = {
@@ -77,6 +78,7 @@ class Blog extends Component {
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx
               : ''}
+            <Comments blog={blog} />
           </Fragment>
         )
         }
