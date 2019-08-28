@@ -12,6 +12,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import BlogSnippets from '../Blog/BlogSnippets'
 import Blog from '../Blog/Blog'
 import UpdateBlog from '../Blog/UpdateBlog'
+import CreateBlog from '../Blog/CreateBlog'
 import Author from '../Author/Author'
 class App extends Component {
   constructor () {
@@ -76,6 +77,16 @@ class App extends Component {
             path='/blogs/:id/edit'
             render={() => (
               <UpdateBlog
+                user={user}
+                alert={this.alert}
+              />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path='/createblog'
+            render={() => (
+              <CreateBlog
                 user={user}
                 alert={this.alert}
               />
