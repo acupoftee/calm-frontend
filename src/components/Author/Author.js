@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 // import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -32,6 +32,11 @@ class Author extends Component {
         { author && (
           <Fragment>
             <h1>{author.displayName}</h1>
+            {(this.props.user) && (this.props.user._id === author._id)
+              ? <Link to={'/createblog'}>
+                <p>Create Blog</p>
+              </Link>
+              : ''}
             <div>
               {blogSnippetsJsx}
             </div>
