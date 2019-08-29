@@ -78,7 +78,7 @@ class Blog extends Component {
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx
               : ''}
-            <Comments blog={blog} user={this.props.user} alert={this.props.alert}/>
+            <Comments blogId={blog._id.toString()} user={this.props.user} alert={this.props.alert}/>
           </Fragment>
         )
         }

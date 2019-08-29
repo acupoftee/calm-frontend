@@ -5,40 +5,37 @@ import apiUrl from '../../apiConfig'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 
-// import ListGroup from 'react-bootstrap/ListGroup'
-// import Card from 'react-bootstrap/Card'
-// import Spinner from 'react-bootstrap/Spinner'
-
 class Comments extends Component {
   state = {
-    comments: this.props.blog.comments,
+    comments: [],
     deleted: false,
     added: false,
+    isLoading: true,
     comment: {
       text: '',
       author: this.props.user ? this.props.user.displayName : '',
-      blog: this.props.blog._id
+      blog: this.props.blogId
     }
   }
 
   async componentDidMount () {
+    await this.getComments()
+  }
+
+  getComments = async () => {
     try {
-      const commentObjs = []
-      console.log(this.props.blog._id)
-      // await the comment response from the API call
-      console.log('Current comments', this.state.comments)
-      for (const id of this.state.comments) {
-        const response = await axios(`${apiUrl}/comments/${id}`)
-        console.log('response', response)
-        commentObjs.push(response.data.comment)
-      }
-      // const response = await axios(`${apiUrl}/comments/`)
-      // add the comments to the comments state prop
-      this.setState({ comments: commentObjs, isLoading: false })
-      console.log('comments', this.state.comments)
+      const response = await axios.get(`${apiUrl}/comments`)
+      const comments = response.data.comments.filter(comment => (
+        comment.blog === this.props.blogId
+      ))
+      this.setState({ comments: comments, isLoading: false })
     } catch (error) {
-      // TODO: no console errors
-      this.setState({ comments: [], isLoading: false })
+      console.error(error)
+      this.props.alert({
+        heading: 'Error',
+        message: 'There was a problem loading comments.',
+        variant: 'danger'
+      })
     }
   }
 
@@ -49,12 +46,13 @@ class Comments extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      this.setState({ deleted: true })
       this.props.alert({
         heading: 'Success!!!!',
         message: 'You deleted a comment.',
         variant: 'success'
       })
+      this.setState({ deleted: true })
+      await this.getComments()
     } catch (error) {
       this.props.alert({
         heading: 'Error',
@@ -71,7 +69,7 @@ class Comments extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     try {
-      await axios({
+      const response = await axios({
         method: 'POST',
         url: `${apiUrl}/comments`,
         headers: {
@@ -81,13 +79,13 @@ class Comments extends Component {
           comment: this.state.comment
         }
       })
-      this.setState({ added: true })
+      console.log('handleSubmit response', response.data)
+      this.setState({ added: true, comments: [response.data, ...this.state.comments], comment: { ...this.state.comment, text: '' } })
       this.props.alert({
         heading: 'Success!!!!',
         message: 'You added a comment.',
         variant: 'success'
       })
-      // this.props.history.push(`/blogs/${this.props.blog._id}`)
     } catch (error) {
       console.log(error)
       this.props.alert({
@@ -100,20 +98,31 @@ class Comments extends Component {
 
   render () {
     // const { deleted, added } = this.state
-    const commentsJsx = this.state.comments.map((comment, i) => (
-      <Comment
-        comment={comment}
-        user={this.props.user}
-        handleDelete={this.delete}
-        key={i}
-      />
-    ))
+    // console.log(this.state.comments[0].author)
+    // const commentsJsx = this.state.comments.map((comment, i) => (
+    //   <Comment
+    //     comment={comment}
+    //     user={this.props.user}
+    //     handleDelete={this.delete}
+    //     key={i}
+    //   />
+    // ))
     // if (this.state.loading) {
     //   return (
     //     <Spinner animation="border" variant="primary" />
     //   )
     // }
-
+    let commentsJsx
+    if (!this.state.isLoading) {
+      commentsJsx = this.state.comments.map((comment, i) => (
+        <Comment
+          comment={comment}
+          user={this.props.user}
+          handleDelete={this.delete}
+          key={i}
+        />
+      ))
+    }
     return (
       <div className='comment-section'>
         <h3>Comments</h3>
