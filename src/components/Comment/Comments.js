@@ -30,7 +30,6 @@ class Comments extends Component {
       ))
       this.setState({ comments: comments, isLoading: false })
     } catch (error) {
-      console.error(error)
       this.props.alert({
         heading: 'Error',
         message: 'There was a problem loading comments.',
@@ -79,7 +78,6 @@ class Comments extends Component {
           comment: this.state.comment
         }
       })
-      console.log('handleSubmit response', response.data)
       this.setState({ added: true, comments: [response.data, ...this.state.comments], comment: { ...this.state.comment, text: '' } })
       this.props.alert({
         heading: 'Success!!!!',
@@ -87,7 +85,6 @@ class Comments extends Component {
         variant: 'success'
       })
     } catch (error) {
-      console.log(error)
       this.props.alert({
         heading: 'Error',
         message: 'There was a problem adding your comment.',

@@ -38,7 +38,13 @@ class CreateBlog extends Component {
         })
         this.props.history.push(`/blogs/${response.data.blog._id}`)
       })
-      .catch(console.error)
+      .catch(() => {
+        this.props.alert({
+          heading: 'Error',
+          message: 'There was a problem creatinga  blog.',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

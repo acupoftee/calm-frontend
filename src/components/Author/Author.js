@@ -17,7 +17,11 @@ class Author extends Component {
       const blogs = await axios(`${apiUrl}/blogs`)
       this.setState({ author: response.data.user, blogs: blogs.data.blogs })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'Error',
+        message: 'There was a problem loading this author.',
+        variant: 'danger'
+      })
     }
   }
 

@@ -24,7 +24,6 @@ class UpdateBlog extends Component {
   }
 
   handleSubmit = event => {
-    console.log(this.props.user.token)
     event.preventDefault()
     axios({
       method: 'PATCH',
@@ -42,10 +41,15 @@ class UpdateBlog extends Component {
           message: 'You updated a blog.',
           variant: 'success'
         })
-        console.log(response)
         this.props.history.push(`/blogs/${this.state.blog._id}`)
       })
-      .catch(console.error)
+      .catch(() => {
+        this.props.alert({
+          heading: 'Error',
+          message: 'There was a problem updating this blog.',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

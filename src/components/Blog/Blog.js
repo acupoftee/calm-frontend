@@ -17,7 +17,11 @@ class Blog extends Component {
       const response = await axios(`${apiUrl}/blogs/${this.props.match.params.id}`)
       this.setState({ blog: response.data.blog, loading: false })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'Error',
+        message: 'There was a problem loading blog.',
+        variant: 'danger'
+      })
     }
   }
 
@@ -35,7 +39,6 @@ class Blog extends Component {
         variant: 'success'
       })
     } catch (error) {
-      console.log(error)
       this.props.alert({
         heading: 'Error',
         message: 'There was a problem deleting this.',

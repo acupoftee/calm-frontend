@@ -61,7 +61,11 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <Route exact path='/' component={BlogSnippets} />
+          <Route exact path='/' render={() => (
+            <BlogSnippets
+              alert={this.alert}
+            />
+          )} />
           <Route exact path='/blogs/:id'
             user={user}
             render={() => (
@@ -72,7 +76,7 @@ class App extends Component {
             )}/>
           <Route exact path='/authors/:id'
             render={() => (
-              <Author user={user}/>
+              <Author user={user} alert={this.alert}/>
             )}/>
           <AuthenticatedRoute
             user={user}
