@@ -5,9 +5,14 @@
   padding: 5%;
 }
 
-.comment {
+.comment,
+.comment-card {
   margin: 2% 0;
   padding: 2%;
+}
+
+.comment-section {
+  margin-top: 50px;
 }
 
 .delete-comment {
@@ -15,6 +20,15 @@
 
   &:hover {
     color: lighten(#ff0000, 30%);
+    cursor: pointer;
+  }
+}
+
+.add-comment {
+  color: blue;
+
+  &:hover {
+    color: lighten(#0000ff, 30%);
     cursor: pointer;
   }
 }

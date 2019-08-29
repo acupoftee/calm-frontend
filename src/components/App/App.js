@@ -13,6 +13,8 @@ import BlogSnippets from '../Blog/BlogSnippets'
 import Blog from '../Blog/Blog'
 import UpdateBlog from '../Blog/UpdateBlog'
 import CreateBlog from '../Blog/CreateBlog'
+
+// import Comments from '../Comment/Comments'
 import Author from '../Author/Author'
 class App extends Component {
   constructor () {

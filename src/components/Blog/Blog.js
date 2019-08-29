@@ -45,7 +45,6 @@ class Blog extends Component {
   }
 
   render () {
-    console.log('This is a user', this.props.user)
     const { blog, loading, deleted } = this.state
     let buttonGroupJsx
     if (deleted) {
@@ -53,7 +52,7 @@ class Blog extends Component {
         {
           pathname: `/authors/${blog.owner}`,
           state: {
-            msg: 'Movie successfully deleted'
+            msg: 'Blog successfully deleted'
           }
         }
       }/>
@@ -79,7 +78,7 @@ class Blog extends Component {
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx
               : ''}
-            <Comments blog={blog} user={this.props.user} alerts={this.props.alert}/>
+            <Comments blog={blog} user={this.props.user} alert={this.props.alert}/>
           </Fragment>
         )
         }

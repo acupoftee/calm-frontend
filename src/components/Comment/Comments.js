@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
-// import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
+// import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Comment from './Comment'
+import CommentForm from './CommentForm'
 
 // import ListGroup from 'react-bootstrap/ListGroup'
 // import Card from 'react-bootstrap/Card'
@@ -11,12 +12,19 @@ import Comment from './Comment'
 class Comments extends Component {
   state = {
     comments: this.props.blog.comments,
-    deleted: false
+    deleted: false,
+    added: false,
+    comment: {
+      text: '',
+      author: this.props.user ? this.props.user.displayName : '',
+      blog: this.props.blog._id
+    }
   }
 
   async componentDidMount () {
     try {
       const commentObjs = []
+      console.log(this.props.blog._id)
       // await the comment response from the API call
       console.log('Current comments', this.state.comments)
       for (const id of this.state.comments) {
@@ -30,7 +38,6 @@ class Comments extends Component {
       console.log('comments', this.state.comments)
     } catch (error) {
       // TODO: no console errors
-      console.error(error)
       this.setState({ comments: [], isLoading: false })
     }
   }
@@ -49,7 +56,6 @@ class Comments extends Component {
         variant: 'success'
       })
     } catch (error) {
-      console.log(error)
       this.props.alert({
         heading: 'Error',
         message: 'There was a problem deleting this.',
@@ -58,7 +64,42 @@ class Comments extends Component {
     }
   }
 
+  handleChange = event => {
+    this.setState({ comment: { ...this.state.comment, [event.target.name]: event.target.value } })
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+    try {
+      await axios({
+        method: 'POST',
+        url: `${apiUrl}/comments`,
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        },
+        data: {
+          comment: this.state.comment
+        }
+      })
+      this.setState({ added: true })
+      this.props.alert({
+        heading: 'Success!!!!',
+        message: 'You added a comment.',
+        variant: 'success'
+      })
+      // this.props.history.push(`/blogs/${this.props.blog._id}`)
+    } catch (error) {
+      console.log(error)
+      this.props.alert({
+        heading: 'Error',
+        message: 'There was a problem adding your comment.',
+        variant: 'danger'
+      })
+    }
+  }
+
   render () {
+    // const { deleted, added } = this.state
     const commentsJsx = this.state.comments.map((comment, i) => (
       <Comment
         comment={comment}
@@ -74,10 +115,17 @@ class Comments extends Component {
     // }
 
     return (
-      <Fragment>
+      <div className='comment-section'>
         <h3>Comments</h3>
+        { this.props.user
+          ? <CommentForm
+            comment={this.state.comment}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+          : ''}
         { this.state.comments.length ? commentsJsx : 'No comments yet :C' }
-      </Fragment>
+      </div>
     )
   }
 }
