@@ -9,3 +9,12 @@
   margin: 2% 0;
   padding: 2%;
 }
+
+.delete-comment {
+  color: red;
+
+  &:hover {
+    color: lighten(#ff0000, 30%);
+    cursor: pointer;
+  }
+}

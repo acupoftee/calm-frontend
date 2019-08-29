@@ -45,6 +45,7 @@ class Blog extends Component {
   }
 
   render () {
+    console.log('This is a user', this.props.user)
     const { blog, loading, deleted } = this.state
     let buttonGroupJsx
     if (deleted) {
@@ -78,7 +79,7 @@ class Blog extends Component {
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx
               : ''}
-            <Comments blog={blog} />
+            <Comments blog={blog} user={this.props.user} alerts={this.props.alert}/>
           </Fragment>
         )
         }
