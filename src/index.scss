@@ -16,19 +16,5 @@
 }
 
 .delete-comment {
-  color: red;
-
-  &:hover {
-    color: lighten(#ff0000, 30%);
-    cursor: pointer;
-  }
-}
-
-.add-comment {
-  color: blue;
-
-  &:hover {
-    color: lighten(#0000ff, 30%);
-    cursor: pointer;
-  }
+  width: 150px;
 }

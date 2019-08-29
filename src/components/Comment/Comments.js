@@ -97,21 +97,6 @@ class Comments extends Component {
   }
 
   render () {
-    // const { deleted, added } = this.state
-    // console.log(this.state.comments[0].author)
-    // const commentsJsx = this.state.comments.map((comment, i) => (
-    //   <Comment
-    //     comment={comment}
-    //     user={this.props.user}
-    //     handleDelete={this.delete}
-    //     key={i}
-    //   />
-    // ))
-    // if (this.state.loading) {
-    //   return (
-    //     <Spinner animation="border" variant="primary" />
-    //   )
-    // }
     let commentsJsx
     if (!this.state.isLoading) {
       commentsJsx = this.state.comments.map((comment, i) => (
