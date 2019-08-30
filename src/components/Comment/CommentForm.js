@@ -20,7 +20,7 @@ const CommentForm = ({ comment, handleChange, handleSubmit }) => (
         </Form.Control>
       </Form.Group>
 
-      <Button variant="outline-primary" type="submit">
+      <Button variant="outline-success" type="submit">
         Submit
       </Button>
     </Form>

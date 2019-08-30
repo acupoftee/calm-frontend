@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Comments from '../Comment/Comments'
+import moment from 'moment'
 
 class Blog extends Component {
   state = {
@@ -63,20 +64,21 @@ class Blog extends Component {
     if (!loading) {
       buttonGroupJsx = (
         <Fragment>
-          <Button href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
+          <Button variant="success" href={`#/blogs/${blog._id}/edit`}>Edit Blog</Button>
           <span>&nbsp;</span>
           <Button variant="danger" onClick={this.delete}>Delete Blog</Button>
         </Fragment>
       )
     }
     return (
-      <div>
+      <div className="blog">
         { blog && (
           <Fragment>
             <h1>{blog.title}</h1>
             <Link to={`/authors/${blog.owner}`}>
-              <small className="blog-author-full">{blog.author}</small>
+              <p className="blog-author-full">{blog.author}</p>
             </Link>
+            <p className="blog-date-full">{moment(blog.createdAt).format('MMM Do YYYY')}</p>
             <p>{blog.text}</p>
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx

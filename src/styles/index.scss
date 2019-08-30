@@ -1,0 +1,69 @@
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:300|Source+Sans+Pro:600|Viga&display=swap');
+
+html,
+body {
+  height: 100vh;
+}
+nav {
+  background-color: #3CB371;
+}
+
+.blog {
+  margin-top: 30px;
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .blog-author-full,
+  .blog-date-full {
+    color: gray;
+    font-size: 1.2em;
+    margin-top: -10px;
+  }
+
+  .blog-date-full {
+    font-size: .9em;
+  }
+}
+
+.blog-snippet {
+  margin: 5% 0;
+  padding: 5%;
+
+  .blog-snippet-title {
+    color: #3CB371;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+  }
+
+  .blog-snippet-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+  }
+
+  .blog-snippet-author {
+    font-size: .9em;
+  }
+
+  .blog-snippet-footer {
+    color: gray;
+    font-size: .8em;
+    margin-top: -10px;
+  }
+}
+
+.comment,
+.comment-card {
+  margin: 2% 0;
+  padding: 2%;
+}
+
+.comment-section {
+  margin-top: 50px;
+}
+
+.delete-comment {
+  width: 150px;
+}

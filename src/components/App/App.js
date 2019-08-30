@@ -22,7 +22,8 @@ class App extends Component {
 
     this.state = {
       user: null,
-      alerts: []
+      alerts: [],
+      darkMode: false
     }
   }
 
@@ -32,6 +33,10 @@ class App extends Component {
 
   alert = ({ heading, message, variant }) => {
     this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
+  }
+
+  dark = darkMode => {
+    this.setState({ darkMode: !darkMode })
   }
 
   render () {
@@ -50,20 +55,21 @@ class App extends Component {
         ))}
         <main className="container">
           <Route path='/sign-up' render={() => (
-            <SignUp alert={this.alert} setUser={this.setUser} />
+            <SignUp alert={this.alert} setUser={this.setUser} theme={this.dark}/>
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} />
+            <SignIn alert={this.alert} setUser={this.setUser} theme={this.dark} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
+            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} theme={this.dark}/>
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword alert={this.alert} user={user} />
+            <ChangePassword alert={this.alert} user={user} theme={this.dark} />
           )} />
           <Route exact path='/' render={() => (
             <BlogSnippets
               alert={this.alert}
+              theme={this.dark}
             />
           )} />
           <Route exact path='/blogs/:id'
@@ -72,11 +78,12 @@ class App extends Component {
               <Blog
                 user={user}
                 alert={this.alert}
+                theme={this.dark}
               />
             )}/>
           <Route exact path='/authors/:id'
             render={() => (
-              <Author user={user} alert={this.alert}/>
+              <Author user={user} alert={this.alert} theme={this.dark}/>
             )}/>
           <AuthenticatedRoute
             user={user}
@@ -85,6 +92,7 @@ class App extends Component {
               <UpdateBlog
                 user={user}
                 alert={this.alert}
+                theme={this.dark}
               />
             )}
           />
@@ -95,6 +103,7 @@ class App extends Component {
               <CreateBlog
                 user={user}
                 alert={this.alert}
+                theme={this.dark}
               />
             )}
           />
