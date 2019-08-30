@@ -12,7 +12,7 @@ This will be the MVP for a blogging platform called *Central African Lifestyle M
 # Planning
 This is a contracted project that aims to provide a health and wellness platform for African women and the diaspora. This means that extensive communication with my client was necessary for moving forward. My client's MVP entailed reading a blog, writing a blog, editing a blog, and deleting a blog along with reading a comment, adding a comment, and deleting a comment.
 
-We descoped the project to focus on the Blog only. This was to familiarize myself with React, which we both would like to use in the future. We decided to use React over Handlebars because it's scalable and modular which is ideal for rapid growth.
+We descoped the project and focused on the Blog only. This gave us plenty of time to familiarize ourselves with React, which we both would like to use in the future. We decided to use React over Handlebars because it's scalable and modular which is ideal for rapid growth.
 
 Standups occured every three hours via text communication. The project was then completed using Behavior Driven Development and Error Driven Development.
 
