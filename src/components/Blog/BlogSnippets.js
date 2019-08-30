@@ -10,7 +10,8 @@ import Spinner from 'react-bootstrap/Spinner'
 
 class BlogSnippets extends Component {
   state = {
-    blogSnippets: []
+    blogSnippets: [],
+    isLoading: true
   }
 
   async componentDidMount () {
@@ -18,7 +19,7 @@ class BlogSnippets extends Component {
       // await the blog response from the API call
       const response = await axios(`${apiUrl}/blogs`)
       // add the blogs to the blogSnippets state prop
-      this.setState({ blogSnippets: response.data.blogs })
+      this.setState({ blogSnippets: response.data.blogs, isLoading: false })
     } catch (error) {
       this.props.alert({
         heading: 'Error',
@@ -32,9 +33,17 @@ class BlogSnippets extends Component {
     const blogSnippetsJsx = this.state.blogSnippets.map(blog => (
       <BlogSnippet blog={blog} key={blog._id}/>
     ))
+
+    if (this.state.isLoading) {
+      return (
+        <div className="text-center">
+          <Spinner animation="border" variant="success" />
+        </div>
+      )
+    }
     return (
       <Fragment>
-        {this.state.blogSnippets.length ? blogSnippetsJsx : <Spinner animation="border" variant="primary" /> }
+        {this.state.blogSnippets.length ? blogSnippetsJsx : 'No blogs yet. Be the first!'}
       </Fragment>
     )
   }

@@ -1,12 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:300|Source+Sans+Pro:600|Viga&display=swap');
 
-html,
-body {
-  height: 100vh;
-}
 nav {
   background-color: #3CB371;
+}
+
+#root {
+  display: grid;
+  grid-auto-rows: max-content auto;
+  min-height: 100vh;
+​
+  main {
+    align-self: center;
+    justify-self: center;
+  }
 }
 
 .blog {

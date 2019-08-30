@@ -25,7 +25,12 @@ const unauthenticatedOptions = (
 const Header = ({ user }) => (
   <Navbar variant="dark" expand="md">
     <Navbar.Brand href="#">
-      calm
+      <img
+        src="logo.png"
+        height="30"
+        className="d-inline-block align-top"
+        alt="Calm logo"
+      />
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
