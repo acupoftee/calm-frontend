@@ -107,7 +107,7 @@ class Comments extends Component {
     }
     return (
       <div className='comment-section'>
-        <h3>Comments</h3>
+        <h3 className="comment-header">Comments</h3>
         { this.props.user
           ? <CommentForm
             comment={this.state.comment}

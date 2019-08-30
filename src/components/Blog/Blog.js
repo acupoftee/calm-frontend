@@ -74,11 +74,11 @@ class Blog extends Component {
       <div className="blog">
         { blog && (
           <Fragment>
-            <h1>{blog.title}</h1>
+            <h1 className="blog-title">{blog.title}</h1>
             <Link to={`/authors/${blog.owner}`}>
               <p className="blog-author-full">{blog.author}</p>
             </Link>
-            <p className="blog-date-full">{moment(blog.createdAt).format('MMM Do YYYY')}</p>
+            <p className="blog-date-full">{moment(blog.createdAt).format('MMM Do YYYY h:mm a')}</p>
             <p>{blog.text}</p>
             {(this.props.user && blog) && (this.props.user._id === blog.owner)
               ? buttonGroupJsx

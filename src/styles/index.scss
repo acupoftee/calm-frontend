@@ -19,7 +19,9 @@ nav {
 .blog {
   margin-top: 30px;
 
-  h1 {
+  h1,
+  .comment-header {
+    color: #3CB371;
     font-family: 'Montserrat', sans-serif;
   }
 
